@@ -3,19 +3,23 @@
    深いチャコール × 抑えたブラス × 明朝/等幅/ゴシック
    ============================================================ */
 :root {
-  --bg: #131110;
-  --bg-2: #1a1613;
-  --bg-3: #221d19;
-  --ink: #f0ebe3;
-  --ink-soft: #cbc3b6;
-  --muted: #948b7d;
-  --faint: #837a6d;
-  --line: rgba(240, 235, 227, 0.1);
-  --line-2: rgba(240, 235, 227, 0.18);
-  --accent: #c6a15b; /* muted brass */
-  --accent-bright: #dcbe82;
-  --accent-wash: rgba(198, 161, 91, 0.12);
-  --grid-line: rgba(240, 235, 227, 0.022);
+  /* GitHub Dark (Primer) */
+  --bg: #0d1117;
+  --bg-2: #161b22;
+  --bg-3: #21262d;
+  --ink: #e6edf3;
+  --ink-soft: #c9d1d9;
+  --muted: #8b949e;
+  --faint: #6e7681;
+  --line: #21262d;
+  --line-2: #30363d;
+  --accent: #2f81f7;
+  --accent-bright: #58a6ff;
+  --accent-wash: rgba(56, 139, 253, 0.15);
+  --grid-line: rgba(139, 148, 158, 0.06);
+  --glow: rgba(56, 139, 253, 0.13);
+  --success: #3fb950;
+  --success-glow: rgba(63, 185, 80, 0.5);
 
   /* コンテナ幅は rem 基準にして、画面幅に応じて拡大する */
   --wrap: 66rem;
@@ -34,19 +38,23 @@
    Light theme（data-theme="light" のとき上書き。ダークがデフォルト）
    ============================================================ */
 :root[data-theme="light"] {
-  --bg: #f4f1ea;
-  --bg-2: #ece7dd;
-  --bg-3: #e3ddce;
-  --ink: #1c1913;
-  --ink-soft: #4c473f;
-  --muted: #6f6759;
-  --faint: #8c8374;
-  --line: rgba(28, 25, 19, 0.12);
-  --line-2: rgba(28, 25, 19, 0.2);
-  --accent: #9c6f2c;
-  --accent-bright: #7d551c;
-  --accent-wash: rgba(156, 111, 44, 0.12);
-  --grid-line: rgba(28, 25, 19, 0.05);
+  /* GitHub Light (Primer) */
+  --bg: #ffffff;
+  --bg-2: #f6f8fa;
+  --bg-3: #eaeef2;
+  --ink: #1f2328;
+  --ink-soft: #424a53;
+  --muted: #59636e;
+  --faint: #6e7781;
+  --line: #d8dee4;
+  --line-2: #d0d7de;
+  --accent: #0969da;
+  --accent-bright: #0550ae;
+  --accent-wash: rgba(9, 105, 218, 0.1);
+  --grid-line: rgba(31, 35, 40, 0.045);
+  --glow: rgba(9, 105, 218, 0.08);
+  --success: #1a7f37;
+  --success-glow: rgba(26, 127, 55, 0.4);
 }
 
 /* ============================================================
@@ -134,7 +142,7 @@ dd {
   top: -100px;
   z-index: 200;
   background: var(--accent);
-  color: #17140e;
+  color: #ffffff;
   padding: 0.6rem 1rem;
   font-family: var(--mono);
   font-size: 0.85rem;
@@ -443,8 +451,7 @@ body::before {
   aspect-ratio: 1;
   background: radial-gradient(
     circle,
-    rgba(198, 161, 91, 0.16),
-    rgba(198, 161, 91, 0.04) 42%,
+    var(--glow),
     transparent 68%
   );
   pointer-events: none;
@@ -543,17 +550,17 @@ body::before {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--accent-bright);
-  box-shadow: 0 0 8px 1px rgba(220, 190, 130, 0.6);
+  background: var(--success);
+  box-shadow: 0 0 8px 1px var(--success-glow);
   animation: pulse 2.4s ease-in-out infinite;
 }
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 7px 1px rgba(220, 190, 130, 0.5);
+    box-shadow: 0 0 7px 1px var(--success-glow);
     opacity: 1;
   }
   50% {
-    box-shadow: 0 0 13px 2px rgba(220, 190, 130, 0.9);
+    box-shadow: 0 0 13px 2px var(--success-glow);
     opacity: 0.82;
   }
 }
@@ -768,7 +775,7 @@ body::before {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(220, 190, 130, 0.5),
+    var(--accent-bright),
     transparent
   );
   opacity: 0;
@@ -844,7 +851,7 @@ body::before {
   aspect-ratio: 1;
   background: radial-gradient(
     circle,
-    rgba(198, 161, 91, 0.12),
+    var(--glow),
     transparent 65%
   );
   pointer-events: none;

@@ -20,7 +20,7 @@
   (function () {
     var root = document.documentElement;
     var meta = document.querySelector('meta[name="theme-color"]');
-    var COLORS = { dark: "#131110", light: "#f4f1ea" };
+    var COLORS = { dark: "#0d1117", light: "#ffffff" };
     var apply = function (theme) {
       root.setAttribute("data-theme", theme);
       if (meta) meta.setAttribute("content", COLORS[theme] || COLORS.dark);

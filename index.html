@@ -1,0 +1,391 @@
+<!--
+  ============================================================
+  自己紹介ホームページ  /  Personal Profile Site
+  デザイン: ダーク・プロダクト（深いチャコール × 抑えたブラス × 明朝 × 等幅）
+  日英切替: 各要素の日本語はそのまま、英語は data-en="..." に記述。
+            改行は {br} と書くと <br> になります。
+  ※ 経歴・スキル・実績は LinkedIn を基に自動作成した下書きです。
+    説明文は仮のものを含みます。ご自身で確認・修正してください（▼編集）。
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en" class="i18n-loading">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- 言語適用までの一瞬のちらつき（FOUC）を防ぐ。JS 無効時は表示する。 -->
+  <style>.i18n-loading body { visibility: hidden; }</style>
+  <noscript><style>.i18n-loading body { visibility: visible; }</style></noscript>
+
+  <!-- ▼編集: タブ・検索結果に出るタイトルと説明文 -->
+  <title>ishtos — Software Engineer</title>
+  <meta name="description" content="ソフトウェアエンジニア ishtos のプロフィール。バックエンドと AI を軸に、経歴・スキル・実績を紹介しています。" />
+
+  <meta property="og:title" content="ishtos — Software Engineer" />
+  <meta property="og:description" content="バックエンドと AI を軸に、プロダクトをつくるソフトウェアエンジニアのプロフィール。" />
+  <meta property="og:type" content="website" />
+  <!-- ▼編集: 公開URL（ユーザーサイトなら https://<username>.github.io/） -->
+  <meta property="og:url" content="https://ishtos.github.io/" />
+  <meta property="og:image" content="https://ishtos.github.io/assets/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ishtos — Software Engineer" />
+  <meta name="twitter:description" content="Backend と AI を軸に、プロダクトをつくるソフトウェアエンジニア。" />
+  <meta name="twitter:image" content="https://ishtos.github.io/assets/og.jpg" />
+
+  <link rel="canonical" href="https://ishtos.github.io/" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#131110" />
+
+  <!-- 構造化データ（検索エンジンに「人物」として認識させる） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "ishtos",
+    "url": "https://ishtos.github.io/",
+    "jobTitle": "Software Engineer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Tokyo", "addressCountry": "JP" },
+    "knowsAbout": ["Backend", "Machine Learning", "Blockchain"],
+    "sameAs": [
+      "https://github.com/ishtos",
+      "https://www.linkedin.com/in/toshiki-ishikawa-1864b8167/"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to content">本文へスキップ</a>
+
+  <!-- ============ トップバー ============ -->
+  <header class="topbar" data-nav>
+    <div class="wrap topbar__inner">
+      <!-- ▼編集: 氏名 -->
+      <a class="topbar__name" href="#top">ishtos</a>
+
+      <div class="topbar__right">
+        <nav class="topnav" aria-label="メインナビゲーション">
+          <a href="#about" data-nav-link>Profile</a>
+          <a href="#career" data-nav-link>Career</a>
+          <a href="#skills" data-nav-link>Skills</a>
+          <a href="#work" data-nav-link>Work</a>
+          <a href="#contact" data-nav-link>Contact</a>
+        </nav>
+
+        <div class="langsw" role="group" aria-label="言語 / Language" data-langsw>
+          <button type="button" data-lang="ja" aria-pressed="false">JA</button>
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        </div>
+
+        <button class="topbar__toggle" type="button" aria-expanded="false" aria-controls="topbar-menu" aria-label="メニューを開く" data-nav-toggle>
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="topbar__menu" id="topbar-menu" data-nav-menu hidden>
+      <a href="#about">Profile</a>
+      <a href="#career">Career</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ ヒーロー ============ -->
+    <section class="hero" id="top">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap hero__inner">
+        <div class="hero__main">
+          <!-- 肩書き・拠点（両言語共通のラベル） -->
+          <p class="hero__eyebrow"><span class="tick" aria-hidden="true"></span>Software Engineer</p>
+          <!-- ▼編集: 氏名 -->
+          <h1 class="hero__name">ishtos</h1>
+          <!-- ▼編集: キャッチコピー（下書き。あとで差し替えてください） -->
+          <p class="hero__lead" data-en="Hands-on, building from zero.{br}I love taking ideas all the way to production."><span class="phrase">アイデアを</span><span class="phrase">ゼロから形にして、</span><span class="phrase">世に出す。</span><br /><span class="phrase">そんなものづくりが</span><span class="phrase">好きです。</span></p>
+          <div class="hero__actions">
+            <a class="lnk" href="#work"><span data-en="View work">実績を見る</span> <span class="arw" aria-hidden="true">→</span></a>
+            <a class="lnk lnk--muted" href="#contact" data-en="Get in touch">連絡する</a>
+          </div>
+        </div>
+
+        <!-- 設定ファイル風のプロフィール（等幅・両言語共通） -->
+        <div class="hero__spec">
+          <p class="spec__file" aria-hidden="true"># ishtos.cfg</p>
+          <dl class="spec">
+            <div class="spec__item">
+              <dt>based_in</dt>
+              <dd>Tokyo</dd>
+            </div>
+            <div class="spec__item">
+              <dt>experience</dt>
+              <dd>7 years</dd>
+            </div>
+            <div class="spec__item">
+              <dt>focus</dt>
+              <dd>Backend · AI · Blockchain</dd>
+            </div>
+            <div class="spec__item">
+              <dt>status</dt>
+              <dd><span class="dot" aria-hidden="true"></span>open_to_work</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ プロフィール ============ -->
+    <section class="sect" id="about">
+      <div class="wrap">
+        <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Profile</p>
+
+        <!-- ▼編集: 自己紹介のリード文（下書き。この一文がページの「顔」になります）
+             日本語は文節ごとに <span class="phrase"> で囲み語中改行を防止。英語は data-en。 -->
+        <h2 class="lead reveal" data-en="An engineer who starts from 'why build it?'{br}Build small and fast, then grow it with the business.">
+          <span class="phrase">「なぜ作るのか」から</span><span class="phrase">考えるエンジニア。</span><br />
+          <span class="phrase">小さく速くつくり、</span><span class="phrase">事業とともに</span><span class="phrase">育てていく。</span>
+        </h2>
+
+        <div class="about__grid">
+          <!-- ▼編集: 自己紹介（下書き。ご自身の言葉に置き換えてください） -->
+          <div class="about__body">
+            <p class="reveal" data-en="My focus has expanded from backend to machine learning and blockchain, but one thing stays constant: solving business problems through technology.">領域はバックエンドから機械学習、ブロックチェーンへと広がってきましたが、一貫しているのは「技術で事業の課題を解く」という視点です。</p>
+            <p class="reveal" data-en="As CTO, I'm involved in everything from technical decisions to team building — but above all, I care about seeing what we build get used and create real value.">CTO として技術選定やチームづくりに関わりながらも、つくったものが実際に使われ、価値を生むところまで見届けることを大切にしています。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 経歴 / 職歴 ============ -->
+    <section class="sect" id="career">
+      <div class="wrap">
+        <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Career</p>
+        <h2 class="sect__title reveal" data-en="Career">経歴</h2>
+
+        <ol class="ledger">
+          <!-- ▼編集: LinkedIn を基にした下書き。期間・役職・説明はご確認ください -->
+          <li class="ledger__row reveal">
+            <div class="ledger__period" data-en="2021 — Present">2021 — 現在</div>
+            <div class="ledger__main">
+              <h3 class="ledger__role" data-en="Backend Engineer → CTO">バックエンドエンジニア → CTO</h3>
+              <p class="ledger__org">Next Finance Tech</p>
+              <p class="ledger__desc" data-en="Mainly operating multiple blockchain nodes and building web applications; now leading development as CTO.">複数のブロックチェーンノードの運用と Web アプリケーションの開発を主に担当し、現在は CTO として開発をリードしています。</p>
+            </div>
+          </li>
+          <li class="ledger__row reveal">
+            <div class="ledger__period" data-en="2022 — Present">2022 — 現在</div>
+            <div class="ledger__main">
+              <h3 class="ledger__role" data-en="Software Engineer">ソフトウェアエンジニア</h3>
+              <p class="ledger__org">Carnot Inc.（Jinba）</p>
+              <p class="ledger__desc" data-en="Working on product development as a software engineer.">ソフトウェアエンジニアとして、プロダクト開発に携わっています。</p>
+            </div>
+          </li>
+          <li class="ledger__row reveal">
+            <div class="ledger__period">2022</div>
+            <div class="ledger__main">
+              <h3 class="ledger__role" data-en="Field AI Engineer">フィールド AI エンジニア</h3>
+              <p class="ledger__org">Graphcore</p>
+              <p class="ledger__desc" data-en="Ported and optimized specific models for a proprietary AI processor (IPU).">独自 AI プロセッサ（IPU）向けに、特定モデルの移植と最適化を担当。</p>
+            </div>
+          </li>
+          <li class="ledger__row reveal">
+            <div class="ledger__period" data-en="2021 — 2022">2021 — 2022</div>
+            <div class="ledger__main">
+              <h3 class="ledger__role" data-en="Machine Learning Engineer">機械学習エンジニア</h3>
+              <p class="ledger__org">ExaWizards Inc.</p>
+              <p class="ledger__desc" data-en="Joined multiple projects as a machine learning engineer, mainly on image detection.">機械学習エンジニアとして複数のプロジェクトに携わり、主に画像検出の案件を担当。</p>
+            </div>
+          </li>
+          <li class="ledger__row reveal">
+            <div class="ledger__period" data-en="2019 — 2021">2019 — 2021</div>
+            <div class="ledger__main">
+              <h3 class="ledger__role" data-en="Software Engineer">ソフトウェアエンジニア</h3>
+              <p class="ledger__org">Goldman Sachs</p>
+              <p class="ledger__desc" data-en="Worked on development, operations, and maintenance in the securities settlement team.">証券決済チームで、システムの開発・運用・保守を担当。</p>
+            </div>
+          </li>
+          <li class="ledger__row reveal">
+            <div class="ledger__period" data-en="2015 — 2019">2015 — 2019</div>
+            <div class="ledger__main">
+              <h3 class="ledger__role" data-en="B.S. in Computer Science">情報工学 学士</h3>
+              <p class="ledger__org" data-en="Keio University">慶應義塾大学</p>
+              <p class="ledger__desc" data-en="Majored in Computer Science.">情報工学を専攻。</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ スキル / 資格 ============ -->
+    <section class="sect" id="skills">
+      <div class="wrap">
+        <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Skills</p>
+        <h2 class="sect__title reveal" data-en="Skills &amp; Awards">スキル・受賞</h2>
+
+        <div class="skills">
+          <!-- ▼編集: カテゴリと項目 -->
+          <div class="skills__group reveal">
+            <div class="skills__label" data-en="Focus">専門</div>
+            <ul class="chips">
+              <li>Backend</li>
+              <li>Machine Learning</li>
+              <li>Blockchain</li>
+            </ul>
+          </div>
+          <div class="skills__group reveal">
+            <div class="skills__label" data-en="Frontend">フロントエンド</div>
+            <ul class="chips">
+              <li>TypeScript + Next.js + React</li>
+            </ul>
+          </div>
+          <div class="skills__group reveal">
+            <div class="skills__label" data-en="Backend">バックエンド</div>
+            <ul class="chips">
+              <li>TypeScript + Hono</li>
+              <li>Java + Spring Boot</li>
+              <li>Kotlin + Ktor</li>
+            </ul>
+          </div>
+          <div class="skills__group reveal">
+            <div class="skills__label" data-en="Infrastructure">インフラ</div>
+            <ul class="chips">
+              <li>Terraform</li>
+              <li>Kubernetes</li>
+            </ul>
+          </div>
+          <div class="skills__group reveal">
+            <div class="skills__label" data-en="Cloud">クラウド</div>
+            <ul class="chips">
+              <li>AWS</li>
+              <li>Azure</li>
+              <li>Google Cloud</li>
+            </ul>
+          </div>
+          <div class="skills__group reveal">
+            <div class="skills__label" data-en="SRE">SRE</div>
+            <ul class="chips">
+              <li>Datadog</li>
+              <li>Prometheus</li>
+              <li>Grafana</li>
+              <li>Sentry</li>
+            </ul>
+          </div>
+          <div class="skills__group reveal">
+            <div class="skills__label" data-en="Awards &amp; Certifications">受賞・資格</div>
+            <ul class="chips">
+              <li>Kaggle Competition Master</li>
+              <li>JPHACKS Finalist</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 実績 / プロジェクト ============ -->
+    <section class="sect" id="work">
+      <div class="wrap">
+        <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Selected Work</p>
+        <h2 class="sect__title reveal" data-en="Selected Work">実績</h2>
+
+        <div class="works">
+          <!-- ▼編集: LinkedIn を基にした下書き。内容はご確認・修正ください -->
+          <article class="work reveal">
+            <div class="work__top">
+              <h3 class="work__title">Kaggle — 2019 Data Science Bowl</h3>
+              <span class="work__year">2020</span>
+            </div>
+            <p class="work__desc" data-en="2nd place in Kaggle's 2019 Data Science Bowl. Earned silver and gold medals on the way to Competition Master.">Kaggle「2019 Data Science Bowl」で2位入賞。銀・金メダルを獲得し Competition Master に。</p>
+            <ul class="chips--plain chips">
+              <li>Kaggle</li>
+              <li>Machine Learning</li>
+              <li>Computer Vision</li>
+            </ul>
+          </article>
+
+          <article class="work reveal">
+            <div class="work__top">
+              <h3 class="work__title">Zindi — Fall Armyworm Challenge</h3>
+              <span class="work__year">2022</span>
+            </div>
+            <p class="work__desc" data-en="1st place in Zindi's Makerere Fall Armyworm Crop Challenge.">Zindi の Makerere Fall Armyworm Crop Challenge で1位を獲得。</p>
+            <ul class="chips--plain chips">
+              <li>Zindi</li>
+              <li>Computer Vision</li>
+              <li>Agriculture AI</li>
+            </ul>
+          </article>
+
+          <article class="work reveal">
+            <div class="work__top">
+              <h3 class="work__title">GitHub / OSS</h3>
+              <span class="work__year" data-en="Ongoing">継続中</span>
+            </div>
+            <p class="work__desc" data-en="Personal and experimental projects, shared and maintained on GitHub.">個人開発や実験的なプロジェクトを GitHub で公開・管理しています。</p>
+            <ul class="chips--plain chips">
+              <li>Python</li>
+              <li>OSS</li>
+            </ul>
+            <a class="work__link" href="https://github.com/ishtos" rel="noopener" target="_blank"><span data-en="View on GitHub">GitHub を見る</span> <span class="arw" aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 連絡先 ============ -->
+    <section class="sect contact" id="contact">
+      <div class="contact__glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Contact</p>
+        <h2 class="contact__title reveal" data-en="Let's{br}work together.">お気軽に、<br />ご連絡ください。</h2>
+        <p class="contact__note reveal" data-en="Open to project inquiries, technical discussions — anything is welcome.">お仕事のご相談、技術的な話、なんでも歓迎します。</p>
+
+        <ul class="contact__links reveal">
+          <!-- ▼編集: 連絡先。不要なものは <li> ごと削除、メール等を追加できます -->
+          <li>
+            <a href="https://github.com/ishtos" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg class="contact__icon" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                <span>GitHub</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/toshiki-ishikawa-1864b8167/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg class="contact__icon" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                <span>LinkedIn</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__inner">
+      <!-- ▼編集: 氏名 / 年 -->
+      <span>© 2026 ishtos</span>
+      <a href="#top" class="foot__top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <!-- フィルムグレイン（繊細な質感） -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <script src="assets/main.js" defer></script>
+  <!-- FOUC ゲートの保険（main.js が古い/欠落でも本文を必ず表示する。HTML内なので常に最新） -->
+  <script>
+    setTimeout(function () {
+      document.documentElement.classList.remove("i18n-loading");
+    }, 500);
+  </script>
+</body>
+</html>

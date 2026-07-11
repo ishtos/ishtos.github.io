@@ -492,6 +492,10 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .hero__name::after { animation: none; }
 }
+/* ライト時はカーソルを控えめなグレーに（青は目立ちすぎるため） */
+:root[data-theme="light"] .hero__name::after {
+  color: var(--muted);
+}
 .hero__lead {
   margin-top: 1.75rem;
   max-width: 30rem;

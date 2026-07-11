@@ -492,9 +492,10 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .hero__name::after { animation: none; }
 }
-/* ライト時はカーソルを控えめなグレーに（青は目立ちすぎるため） */
+/* カーソルはダーク/ライトとも青で統一。ライトは半透明にして主張を抑える
+   （点滅と干渉しないよう opacity ではなく色のアルファで調整）。 */
 :root[data-theme="light"] .hero__name::after {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--accent) 40%, transparent);
 }
 .hero__lead {
   margin-top: 1.75rem;

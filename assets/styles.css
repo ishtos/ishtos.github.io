@@ -15,6 +15,7 @@
   --accent: #c6a15b; /* muted brass */
   --accent-bright: #dcbe82;
   --accent-wash: rgba(198, 161, 91, 0.12);
+  --grid-line: rgba(240, 235, 227, 0.022);
 
   /* コンテナ幅は rem 基準にして、画面幅に応じて拡大する */
   --wrap: 66rem;
@@ -27,6 +28,25 @@
     Menlo, monospace;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   Light theme（data-theme="light" のとき上書き。ダークがデフォルト）
+   ============================================================ */
+:root[data-theme="light"] {
+  --bg: #f4f1ea;
+  --bg-2: #ece7dd;
+  --bg-3: #e3ddce;
+  --ink: #1c1913;
+  --ink-soft: #4c473f;
+  --muted: #6f6759;
+  --faint: #8c8374;
+  --line: rgba(28, 25, 19, 0.12);
+  --line-2: rgba(28, 25, 19, 0.2);
+  --accent: #9c6f2c;
+  --accent-bright: #7d551c;
+  --accent-wash: rgba(156, 111, 44, 0.12);
+  --grid-line: rgba(28, 25, 19, 0.05);
 }
 
 /* ============================================================
@@ -202,8 +222,8 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, rgba(240, 235, 227, 0.022) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(240, 235, 227, 0.022) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 80px 80px;
 }
 
@@ -324,6 +344,41 @@ body::before {
 .langsw button[aria-pressed="true"] {
   color: var(--accent-bright);
   background: var(--accent-wash);
+}
+
+/* テーマ切替（ダーク⇔ライト） */
+.themesw {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.themesw:hover {
+  color: var(--accent-bright);
+  border-color: var(--accent);
+}
+.themesw svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+/* ダーク時は「ライトへ」= 太陽、ライト時は「ダークへ」= 月 を表示 */
+.themesw .icon-moon {
+  display: none;
+}
+:root[data-theme="light"] .themesw .icon-sun {
+  display: none;
+}
+:root[data-theme="light"] .themesw .icon-moon {
+  display: block;
 }
 
 .topbar__toggle {

@@ -18,6 +18,18 @@
   <style>.i18n-loading body { visibility: hidden; }</style>
   <noscript><style>.i18n-loading body { visibility: visible; }</style></noscript>
 
+  <!-- テーマを描画前に適用（ちらつき防止）。保存が無ければダーク。 -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+
   <!-- ▼編集: タブ・検索結果に出るタイトルと説明文 -->
   <title>ishtos — Software Engineer</title>
   <meta name="description" content="ソフトウェアエンジニア ishtos のプロフィール。バックエンドと AI を軸に、経歴・スキル・実績を紹介しています。" />
@@ -38,7 +50,7 @@
   <link rel="canonical" href="https://ishtos.github.io/" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#131110" />
 
   <!-- 構造化データ（検索エンジンに「人物」として認識させる） -->
@@ -81,6 +93,11 @@
           <a href="#work" data-nav-link>Work</a>
           <a href="#contact" data-nav-link>Contact</a>
         </nav>
+
+        <button class="themesw" type="button" data-theme-toggle aria-label="テーマ切替 / Toggle theme" title="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
 
         <div class="langsw" role="group" aria-label="言語 / Language" data-langsw>
           <button type="button" data-lang="ja" aria-pressed="false">JA</button>

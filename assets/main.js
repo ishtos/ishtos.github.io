@@ -15,6 +15,30 @@
   ).matches;
   var hasIO = "IntersectionObserver" in window;
 
+  // --- テーマ切替（ダーク⇔ライト） ---------------------------
+  // data-theme は <head> のインラインスクリプトで描画前に設定済み。
+  (function () {
+    var root = document.documentElement;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    var COLORS = { dark: "#131110", light: "#f4f1ea" };
+    var apply = function (theme) {
+      root.setAttribute("data-theme", theme);
+      if (meta) meta.setAttribute("content", COLORS[theme] || COLORS.dark);
+    };
+    apply(root.getAttribute("data-theme") === "light" ? "light" : "dark");
+    var btn = document.querySelector("[data-theme-toggle]");
+    if (btn) {
+      btn.addEventListener("click", function () {
+        var next =
+          root.getAttribute("data-theme") === "light" ? "dark" : "light";
+        apply(next);
+        try {
+          localStorage.setItem("theme", next);
+        } catch (e) {}
+      });
+    }
+  })();
+
   // --- スクロールで要素をフェードアップ表示 -----------------
   var revealEls = document.querySelectorAll(".reveal");
   if (reduceMotion || !hasIO) {

@@ -554,10 +554,6 @@ body::before {
   letter-spacing: 0;
   color: var(--muted);
 }
-.spec dt::after {
-  content: ":";
-  color: var(--faint);
-}
 .spec dd {
   display: flex;
   align-items: center;
@@ -565,6 +561,11 @@ body::before {
   font-family: var(--mono);
   font-size: 0.82rem;
   color: var(--ink-soft);
+}
+/* skills.cfg と同じ key = value 書式（= を値カラムの先頭で揃える） */
+.spec dd::before {
+  content: "=";
+  color: var(--faint);
 }
 .dot {
   width: 7px;
@@ -779,15 +780,11 @@ body::before {
 /* ============================================================
    Skills
    ============================================================ */
-/* 設定ファイル風のスキル表記（ヒーローの # ishtos.cfg と呼応） */
+/* 設定ファイル風のスキル表記（ヒーローの # ishtos.cfg と同じ書式で統一） */
 .cfg {
   font-family: var(--mono);
   font-size: 0.9rem;
   line-height: 1.7;
-  background: var(--bg-2);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2.25rem);
   overflow-x: auto;
 }
 .cfg__file {

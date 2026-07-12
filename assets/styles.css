@@ -389,6 +389,41 @@ body::before {
   display: block;
 }
 
+/* ⌘K コマンドパレットのトリガー */
+.cmdk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  height: 26px;
+  padding: 0 0.55em;
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--mono);
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.cmdk-btn:hover {
+  color: var(--accent-bright);
+  border-color: var(--accent);
+}
+.cmdk-btn svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+.cmdk-btn__kbd {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+@media (max-width: 400px) {
+  .cmdk-btn__kbd {
+    display: none;
+  }
+}
+
 .topbar__toggle {
   display: none;
   flex-direction: column;
@@ -574,6 +609,25 @@ body::before {
   }
 }
 
+/* 起動シーケンス。.js が付いた時だけ隠して段階表示する（JS無効なら常時表示） */
+.js .hero .boot {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.js .hero.is-booted .boot {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: calc(var(--d, 0) * 90ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .hero .boot {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ============================================================
    Sections (shared)
    ============================================================ */
@@ -654,19 +708,66 @@ body::before {
    Career — ledger
    ============================================================ */
 .ledger {
+  position: relative;
   border-top: 1px solid var(--line);
 }
 .ledger__row {
+  position: relative;
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: clamp(1rem, 4vw, 3rem);
-  padding: clamp(1.6rem, 3vw, 2.2rem) 1.25rem;
-  margin-inline: -1.25rem;
+  padding: clamp(1.6rem, 3vw, 2.2rem) 1.25rem clamp(1.6rem, 3vw, 2.2rem) 2.75rem;
   border-bottom: 1px solid var(--line);
   transition: background 0.3s var(--ease);
 }
 .ledger__row:hover {
   background: var(--bg-2);
+}
+/* タイムラインの背骨。各行が縦線の一区間を担い、連続した1本に見える */
+.ledger__row::before {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-2);
+}
+.ledger__row:first-child::before {
+  top: calc(clamp(1.6rem, 3vw, 2.2rem) + 0.5rem);
+}
+.ledger__row:last-child::before {
+  bottom: auto;
+  height: calc(clamp(1.6rem, 3vw, 2.2rem) + 0.5rem);
+}
+/* 各役職のノード */
+.ledger__row::after {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  top: calc(clamp(1.6rem, 3vw, 2.2rem) + 0.5rem);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--faint);
+  transform: translate(-50%, -50%);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.ledger__row:hover::after {
+  border-color: var(--accent);
+}
+/* 現職ノードは緑で脈打つ（ステータスドットと同じ「生きている」言語） */
+.ledger__row.is-current::after {
+  border-color: var(--success);
+  background: var(--success);
+  box-shadow: 0 0 8px 1px var(--success-glow);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ledger__row.is-current::after {
+    animation: none;
+  }
 }
 .ledger__period {
   font-family: var(--mono);
@@ -697,24 +798,82 @@ body::before {
 /* ============================================================
    Skills
    ============================================================ */
-.skills {
-  border-top: 1px solid var(--line);
-}
-.skills__group {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: clamp(1rem, 4vw, 3rem);
-  align-items: center;
-  padding: 1.75rem 0;
-  border-bottom: 1px solid var(--line);
-}
-.skills__label {
+/* 設定ファイル風のスキル表記（ヒーローの # ishtos.cfg と呼応） */
+.cfg {
   font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 3vw, 2.25rem);
+  overflow-x: auto;
+}
+.cfg__file {
+  color: var(--faint);
+  margin-bottom: 1.25rem;
+}
+.cfg__block + .cfg__block {
+  margin-top: 1.4rem;
+}
+.cfg__section {
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+.cfg__row {
+  display: grid;
+  grid-template-columns: 7em auto 1fr;
+  gap: 0.2rem 0.75rem;
+  align-items: start;
+  padding: 0.22rem 0;
+}
+.cfg__key {
   color: var(--muted);
 }
+.cfg__eq {
+  color: var(--faint);
+}
+.cfg__vals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem 0.55rem;
+  min-width: 0;
+}
+.cfg__vals--stack {
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.cfg__val {
+  color: var(--ink-soft);
+  transition: color 0.2s var(--ease);
+}
+/* インライン値は中点で区切る（stack は改行区切りなので付けない） */
+.cfg__vals:not(.cfg__vals--stack) .cfg__val:not(:last-child)::after {
+  content: "·";
+  margin-left: 0.55rem;
+  color: var(--faint);
+}
+.cfg__val:hover {
+  color: var(--accent-bright);
+}
+@media (max-width: 560px) {
+  .cfg__row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+    padding: 0.5rem 0;
+  }
+  .cfg__eq {
+    display: none;
+  }
+  .cfg__key {
+    color: var(--accent-bright);
+  }
+  .cfg__vals {
+    padding-left: 0.9rem;
+  }
+}
+
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -931,6 +1090,165 @@ body::before {
 }
 .foot__top:hover {
   color: var(--accent-bright);
+}
+
+/* ============================================================
+   Command palette (⌘K)
+   ============================================================ */
+.cmdk {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(3rem, 12vh, 8rem) 1rem 2rem;
+}
+.cmdk[hidden] {
+  display: none;
+}
+.cmdk__backdrop {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: cmdk-fade 0.15s var(--ease);
+}
+.cmdk__panel {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--glow);
+  overflow: hidden;
+  animation: cmdk-pop 0.18s var(--ease);
+}
+@keyframes cmdk-fade {
+  from { opacity: 0; }
+}
+@keyframes cmdk-pop {
+  from { opacity: 0; transform: translateY(-8px) scale(0.99); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cmdk__backdrop,
+  .cmdk__panel {
+    animation: none;
+  }
+}
+.cmdk__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.cmdk__prompt {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+.cmdk__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  outline: none;
+}
+.cmdk__input::placeholder {
+  color: var(--faint);
+}
+.cmdk__esc {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  padding: 0.1em 0.4em;
+}
+.cmdk__list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.4rem;
+}
+.cmdk__item {
+  display: flex;
+  align-items: center;
+  gap: 0.85em;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+.cmdk__item[hidden] {
+  display: none;
+}
+.cmdk__item.is-active {
+  background: var(--accent-wash);
+  color: var(--accent-bright);
+}
+.cmdk__icon {
+  flex: none;
+  width: 1.4em;
+  text-align: center;
+  font-family: var(--mono);
+  color: var(--accent);
+}
+.cmdk__item.is-active .cmdk__icon {
+  color: var(--accent-bright);
+}
+.cmdk__label {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.92rem;
+}
+.cmdk__hint {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--faint);
+}
+.cmdk__empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.cmdk__empty[hidden] {
+  display: none;
+}
+.cmdk__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.cmdk__foot kbd {
+  font-family: var(--mono);
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  padding: 0 0.35em;
+  margin-right: 0.15em;
+  color: var(--ink-soft);
+}
+body.is-cmdk-open {
+  overflow: hidden;
 }
 
 /* ============================================================

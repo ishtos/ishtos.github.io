@@ -5,6 +5,10 @@
 (function () {
   "use strict";
 
+  // JS が動いている印。これが付いた時だけ起動アニメの初期状態（非表示）を効かせる。
+  // JS 無効/失敗時はクラスが付かないので要素は常時表示される（安全側）。
+  document.documentElement.classList.add("js");
+
   // 万一エラーが出ても本文を隠したままにしない（FOUC ゲートの保険）
   setTimeout(function () {
     document.documentElement.classList.remove("i18n-loading");
@@ -197,4 +201,195 @@
         if (e.matches) setMenu(false);
       });
   }
+
+  // --- ヒーロー起動シーケンス --------------------------------
+  (function () {
+    var hero = document.querySelector(".hero");
+    if (!hero) return;
+    if (reduceMotion) {
+      hero.classList.add("is-booted");
+      return;
+    }
+    // 初期状態（非表示）を一度描画してから is-booted を付け、段階表示を走らせる
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        hero.classList.add("is-booted");
+      });
+    });
+  })();
+
+  // --- コマンドパレット (⌘K) --------------------------------
+  (function () {
+    var root = document.querySelector("[data-cmdk]");
+    if (!root) return;
+    var input = root.querySelector("[data-cmdk-input]");
+    var list = root.querySelector("[data-cmdk-list]");
+    var emptyMsg = root.querySelector("[data-cmdk-empty]");
+    var lastFocus = null;
+    var active = -1;
+
+    var isEn = function () {
+      return document.documentElement.lang === "en";
+    };
+
+    var goTo = function (id) {
+      return function () {
+        close();
+        var t = document.getElementById(id);
+        if (!t) return;
+        t.scrollIntoView({
+          behavior: reduceMotion ? "auto" : "smooth",
+          block: "start",
+        });
+        if (history.replaceState) history.replaceState(null, "", "#" + id);
+        else location.hash = "#" + id;
+      };
+    };
+    var openUrl = function (url) {
+      return function () {
+        window.open(url, "_blank", "noopener");
+        close();
+      };
+    };
+
+    var COMMANDS = [
+      { icon: "▸", ja: "プロフィールへ", en: "Go to Profile", hint: "#about", run: goTo("about") },
+      { icon: "▸", ja: "経歴へ", en: "Go to Career", hint: "#career", run: goTo("career") },
+      { icon: "▸", ja: "スキルへ", en: "Go to Skills", hint: "#skills", run: goTo("skills") },
+      { icon: "▸", ja: "実績へ", en: "Go to Work", hint: "#work", run: goTo("work") },
+      { icon: "▸", ja: "連絡先へ", en: "Go to Contact", hint: "#contact", run: goTo("contact") },
+      { icon: "◐", ja: "テーマを切替", en: "Toggle theme", hint: "theme", run: function () {
+          var b = document.querySelector("[data-theme-toggle]");
+          if (b) b.click();
+        } },
+      { icon: "⇄", ja: "言語を切替 (JA / EN)", en: "Toggle language (JA / EN)", hint: "lang", run: function () {
+          var next = isEn() ? "ja" : "en";
+          var b = document.querySelector('[data-langsw] [data-lang="' + next + '"]');
+          if (b) b.click();
+          render();
+        } },
+      { icon: "↗", ja: "GitHub を開く", en: "Open GitHub", hint: "github", run: openUrl("https://github.com/ishtos") },
+      { icon: "↗", ja: "LinkedIn を開く", en: "Open LinkedIn", hint: "linkedin", run: openUrl("https://www.linkedin.com/in/toshiki-ishikawa-1864b8167/") },
+    ];
+
+    var entries = COMMANDS.map(function (cmd, i) {
+      var li = document.createElement("li");
+      li.className = "cmdk__item";
+      li.setAttribute("role", "option");
+      li.id = "cmdk-opt-" + i;
+      var icon = document.createElement("span");
+      icon.className = "cmdk__icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = cmd.icon;
+      var label = document.createElement("span");
+      label.className = "cmdk__label";
+      var hint = document.createElement("span");
+      hint.className = "cmdk__hint";
+      hint.textContent = cmd.hint;
+      li.appendChild(icon);
+      li.appendChild(label);
+      li.appendChild(hint);
+      list.appendChild(li);
+      var entry = { cmd: cmd, el: li, label: label };
+      li.addEventListener("click", function () {
+        cmd.run();
+      });
+      li.addEventListener("mousemove", function () {
+        var idx = visible().indexOf(entry);
+        if (idx !== -1) setActive(idx);
+      });
+      return entry;
+    });
+
+    var visible = function () {
+      return entries.filter(function (e) {
+        return !e.el.hidden;
+      });
+    };
+
+    var setActive = function (i) {
+      var vis = visible();
+      active = i;
+      entries.forEach(function (e) {
+        e.el.classList.remove("is-active");
+      });
+      if (i >= 0 && vis[i]) {
+        vis[i].el.classList.add("is-active");
+        input.setAttribute("aria-activedescendant", vis[i].el.id);
+        vis[i].el.scrollIntoView({ block: "nearest" });
+      } else {
+        input.removeAttribute("aria-activedescendant");
+      }
+    };
+
+    var render = function () {
+      var q = (input.value || "").trim().toLowerCase();
+      entries.forEach(function (e) {
+        e.label.textContent = isEn() ? e.cmd.en : e.cmd.ja;
+        var hay = (e.cmd.en + " " + e.cmd.ja + " " + e.cmd.hint).toLowerCase();
+        e.el.hidden = q.length > 0 && hay.indexOf(q) === -1;
+      });
+      var vis = visible();
+      if (emptyMsg) emptyMsg.hidden = vis.length > 0;
+      setActive(vis.length ? 0 : -1);
+    };
+
+    var open = function () {
+      if (!root.hidden) return;
+      lastFocus = document.activeElement;
+      root.hidden = false;
+      document.body.classList.add("is-cmdk-open");
+      input.value = "";
+      render();
+      input.focus();
+    };
+    var close = function () {
+      if (root.hidden) return;
+      root.hidden = true;
+      document.body.classList.remove("is-cmdk-open");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+    var move = function (dir) {
+      var vis = visible();
+      if (!vis.length) return;
+      setActive((active + dir + vis.length) % vis.length);
+    };
+
+    document.querySelectorAll("[data-cmdk-open]").forEach(function (b) {
+      b.addEventListener("click", open);
+    });
+    root.querySelectorAll("[data-cmdk-close]").forEach(function (b) {
+      b.addEventListener("click", close);
+    });
+
+    // グローバル: ⌘K / Ctrl+K で開閉
+    document.addEventListener("keydown", function (e) {
+      if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        if (root.hidden) open();
+        else close();
+      }
+    });
+
+    // 入力欄のキー操作（矢印で移動 / Enter で実行 / Esc で閉じる / Tab はトラップ）
+    input.addEventListener("input", render);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        close();
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        move(1);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        move(-1);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        var vis = visible();
+        if (active >= 0 && vis[active]) vis[active].cmd.run();
+      } else if (e.key === "Tab") {
+        e.preventDefault();
+      }
+    });
+  })();
 })();

@@ -94,6 +94,11 @@
           <a href="#contact" data-nav-link>Contact</a>
         </nav>
 
+        <button class="cmdk-btn" type="button" data-cmdk-open aria-label="コマンドパレット / Command palette" title="Command palette (⌘K)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4M15 3h4a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4M15 21h4a2 2 0 0 0 2-2v-4"/></svg>
+          <span class="cmdk-btn__kbd" aria-hidden="true">⌘K</span>
+        </button>
+
         <button class="themesw" type="button" data-theme-toggle aria-label="テーマ切替 / Toggle theme" title="Toggle theme">
           <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
           <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -126,12 +131,12 @@
       <div class="wrap hero__inner">
         <div class="hero__main">
           <!-- 肩書き・拠点（両言語共通のラベル） -->
-          <p class="hero__eyebrow"><span class="tick" aria-hidden="true"></span>Software Engineer</p>
+          <p class="hero__eyebrow boot" style="--d:0"><span class="tick" aria-hidden="true"></span>Software Engineer</p>
           <!-- ▼編集: 氏名 -->
-          <h1 class="hero__name">ishtos</h1>
+          <h1 class="hero__name boot" style="--d:1">ishtos</h1>
           <!-- ▼編集: キャッチコピー（下書き。あとで差し替えてください） -->
-          <p class="hero__lead" data-en="Hands-on, building from zero.{br}I love taking ideas all the way to production."><span class="phrase">アイデアを</span><span class="phrase">ゼロから形にして、</span><span class="phrase">世に出す。</span><br /><span class="phrase">そんなものづくりが</span><span class="phrase">好きです。</span></p>
-          <div class="hero__actions">
+          <p class="hero__lead boot" style="--d:3" data-en="Hands-on, building from zero.{br}I love taking ideas all the way to production."><span class="phrase">アイデアを</span><span class="phrase">ゼロから形にして、</span><span class="phrase">世に出す。</span><br /><span class="phrase">そんなものづくりが</span><span class="phrase">好きです。</span></p>
+          <div class="hero__actions boot" style="--d:5">
             <a class="lnk" href="#work"><span data-en="View work">実績を見る</span> <span class="arw" aria-hidden="true">→</span></a>
             <a class="lnk lnk--muted" href="#contact" data-en="Get in touch">連絡する</a>
           </div>
@@ -139,21 +144,21 @@
 
         <!-- 設定ファイル風のプロフィール（等幅・両言語共通） -->
         <div class="hero__spec">
-          <p class="spec__file" aria-hidden="true"># ishtos.cfg</p>
+          <p class="spec__file boot" style="--d:2" aria-hidden="true"># ishtos.cfg</p>
           <dl class="spec">
-            <div class="spec__item">
+            <div class="spec__item boot" style="--d:3">
               <dt>based_in</dt>
               <dd>Tokyo</dd>
             </div>
-            <div class="spec__item">
+            <div class="spec__item boot" style="--d:4">
               <dt>experience</dt>
               <dd>7 years</dd>
             </div>
-            <div class="spec__item">
+            <div class="spec__item boot" style="--d:5">
               <dt>focus</dt>
               <dd>Backend · AI · Blockchain</dd>
             </div>
-            <div class="spec__item">
+            <div class="spec__item boot" style="--d:6">
               <dt>status</dt>
               <dd><span class="dot" aria-hidden="true"></span>open_to_work</dd>
             </div>
@@ -192,7 +197,7 @@
 
         <ol class="ledger">
           <!-- ▼編集: LinkedIn を基にした下書き。期間・役職・説明はご確認ください -->
-          <li class="ledger__row reveal">
+          <li class="ledger__row reveal is-current">
             <div class="ledger__period" data-en="2021 — Present">2021 — 現在</div>
             <div class="ledger__main">
               <h3 class="ledger__role" data-en="Backend Engineer → CTO">バックエンドエンジニア → CTO</h3>
@@ -250,67 +255,72 @@
         <p class="eyebrow"><span class="tick" aria-hidden="true"></span>Skills</p>
         <h2 class="sect__title reveal" data-en="Skills &amp; Awards">スキル・受賞</h2>
 
-        <div class="skills">
-          <!-- ▼編集: カテゴリと項目 -->
-          <div class="skills__group reveal">
-            <div class="skills__label" data-en="Backend">バックエンド</div>
-            <ul class="chips">
-              <li>TypeScript + Hono + Prisma / Drizzle</li>
-              <li>Java + Spring Boot + Hibernate</li>
-              <li>Kotlin + Ktor + Exposed</li>
-            </ul>
+        <!-- 設定ファイル風のスキル表記（ヒーローの # ishtos.cfg と呼応）。
+             キー・値は言語共通なので data-en 不要。 -->
+        <div class="cfg reveal" role="img"
+             aria-label="Skills: backend TypeScript+Hono+Prisma/Drizzle, Java+Spring Boot+Hibernate, Kotlin+Ktor+Exposed; frontend TypeScript+Next.js+React; ml Python+PyTorch+LightGBM; database PostgreSQL, Oracle, MySQL, Redis; cloud AWS, Azure, Google Cloud; infra Terraform, Kubernetes; sre Datadog, Prometheus, Grafana, Sentry; awards Kaggle Competition Master, JPHACKS Finalist.">
+          <p class="cfg__file" aria-hidden="true"># skills.cfg</p>
+
+          <div class="cfg__block" aria-hidden="true">
+            <p class="cfg__section">[stack]</p>
+            <div class="cfg__row">
+              <span class="cfg__key">backend</span><span class="cfg__eq">=</span>
+              <span class="cfg__vals cfg__vals--stack">
+                <span class="cfg__val">TypeScript + Hono + Prisma / Drizzle</span>
+                <span class="cfg__val">Java + Spring Boot + Hibernate</span>
+                <span class="cfg__val">Kotlin + Ktor + Exposed</span>
+              </span>
+            </div>
+            <div class="cfg__row">
+              <span class="cfg__key">frontend</span><span class="cfg__eq">=</span>
+              <span class="cfg__vals"><span class="cfg__val">TypeScript + Next.js + React</span></span>
+            </div>
+            <div class="cfg__row">
+              <span class="cfg__key">ml</span><span class="cfg__eq">=</span>
+              <span class="cfg__vals"><span class="cfg__val">Python + PyTorch + LightGBM</span></span>
+            </div>
           </div>
-          <div class="skills__group reveal">
-            <div class="skills__label" data-en="Frontend">フロントエンド</div>
-            <ul class="chips">
-              <li>TypeScript + Next.js + React</li>
-            </ul>
+
+          <div class="cfg__block" aria-hidden="true">
+            <p class="cfg__section">[data]</p>
+            <div class="cfg__row">
+              <span class="cfg__key">database</span><span class="cfg__eq">=</span>
+              <span class="cfg__vals">
+                <span class="cfg__val">PostgreSQL</span><span class="cfg__val">Oracle</span><span class="cfg__val">MySQL</span><span class="cfg__val">Redis</span>
+              </span>
+            </div>
           </div>
-          <div class="skills__group reveal">
-            <div class="skills__label" data-en="Machine Learning">機械学習</div>
-            <ul class="chips">
-              <li>Python + PyTorch + LightGBM</li>
-            </ul>
+
+          <div class="cfg__block" aria-hidden="true">
+            <p class="cfg__section">[platform]</p>
+            <div class="cfg__row">
+              <span class="cfg__key">cloud</span><span class="cfg__eq">=</span>
+              <span class="cfg__vals">
+                <span class="cfg__val">AWS</span><span class="cfg__val">Azure</span><span class="cfg__val">Google Cloud</span>
+              </span>
+            </div>
+            <div class="cfg__row">
+              <span class="cfg__key">infra</span><span class="cfg__eq">=</span>
+              <span class="cfg__vals">
+                <span class="cfg__val">Terraform</span><span class="cfg__val">Kubernetes</span>
+              </span>
+            </div>
+            <div class="cfg__row">
+              <span class="cfg__key">sre</span><span class="cfg__eq">=</span>
+              <span class="cfg__vals">
+                <span class="cfg__val">Datadog</span><span class="cfg__val">Prometheus</span><span class="cfg__val">Grafana</span><span class="cfg__val">Sentry</span>
+              </span>
+            </div>
           </div>
-          <div class="skills__group reveal">
-            <div class="skills__label" data-en="Database">データベース</div>
-            <ul class="chips">
-              <li>PostgreSQL</li>
-              <li>Oracle</li>
-              <li>MySQL</li>
-              <li>Redis</li>
-            </ul>
-          </div>
-          <div class="skills__group reveal">
-            <div class="skills__label" data-en="Cloud">クラウド</div>
-            <ul class="chips">
-              <li>AWS</li>
-              <li>Azure</li>
-              <li>Google Cloud</li>
-            </ul>
-          </div>
-          <div class="skills__group reveal">
-            <div class="skills__label" data-en="Infrastructure">インフラ</div>
-            <ul class="chips">
-              <li>Terraform</li>
-              <li>Kubernetes</li>
-            </ul>
-          </div>
-          <div class="skills__group reveal">
-            <div class="skills__label" data-en="SRE">SRE</div>
-            <ul class="chips">
-              <li>Datadog</li>
-              <li>Prometheus</li>
-              <li>Grafana</li>
-              <li>Sentry</li>
-            </ul>
-          </div>
-          <div class="skills__group reveal">
-            <div class="skills__label" data-en="Awards &amp; Certifications">受賞・資格</div>
-            <ul class="chips">
-              <li>Kaggle Competition Master</li>
-              <li>JPHACKS Finalist</li>
-            </ul>
+
+          <div class="cfg__block" aria-hidden="true">
+            <p class="cfg__section">[credentials]</p>
+            <div class="cfg__row">
+              <span class="cfg__key">awards</span><span class="cfg__eq">=</span>
+              <span class="cfg__vals">
+                <span class="cfg__val">Kaggle Competition Master</span><span class="cfg__val">JPHACKS Finalist</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -401,6 +411,29 @@
     </div>
   </footer>
 
+  <!-- ============ コマンドパレット (⌘K) ============ -->
+  <div class="cmdk" data-cmdk hidden>
+    <div class="cmdk__backdrop" data-cmdk-close></div>
+    <div class="cmdk__panel" role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="cmdk__bar">
+        <span class="cmdk__prompt" aria-hidden="true">&gt;_</span>
+        <input class="cmdk__input" type="text" data-cmdk-input
+               placeholder="Jump to a section, toggle theme…"
+               aria-label="Command" aria-controls="cmdk-list"
+               aria-expanded="true" role="combobox" aria-autocomplete="list"
+               autocomplete="off" autocapitalize="off" spellcheck="false" />
+        <kbd class="cmdk__esc" aria-hidden="true">esc</kbd>
+      </div>
+      <ul class="cmdk__list" id="cmdk-list" data-cmdk-list role="listbox" aria-label="Commands"></ul>
+      <p class="cmdk__empty" data-cmdk-empty hidden>No matching command</p>
+      <div class="cmdk__foot" aria-hidden="true">
+        <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+        <span><kbd>↵</kbd> select</span>
+        <span><kbd>esc</kbd> close</span>
+      </div>
+    </div>
+  </div>
+
   <!-- フィルムグレイン（繊細な質感） -->
   <div class="grain" aria-hidden="true"></div>
 
@@ -409,6 +442,8 @@
   <script>
     setTimeout(function () {
       document.documentElement.classList.remove("i18n-loading");
+      var h = document.querySelector(".hero");
+      if (h) h.classList.add("is-booted");
     }, 500);
   </script>
 </body>

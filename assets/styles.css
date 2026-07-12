@@ -826,10 +826,9 @@ body::before {
   color: var(--ink-soft);
   transition: color 0.2s var(--ease);
 }
-/* インライン値は中点で区切る（stack は改行区切りなので付けない） */
-.cfg__vals:not(.cfg__vals--stack) .cfg__val:not(:last-child)::after {
-  content: "·";
-  margin-left: 0.55rem;
+/* 値はカンマ区切り（config らしく。改行スタックの行末にも付ける） */
+.cfg__val:not(:last-child)::after {
+  content: ",";
   color: var(--faint);
 }
 .cfg__val:hover {

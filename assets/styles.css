@@ -1017,7 +1017,7 @@ body::before {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem 1.25rem;
-  margin-top: clamp(2.5rem, 6vw, 4rem);
+  margin-top: 0.5rem;
 }
 .contact__links a {
   display: inline-flex;

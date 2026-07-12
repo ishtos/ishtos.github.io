@@ -834,6 +834,15 @@ body::before {
 .cfg__val:hover {
   color: var(--accent-bright);
 }
+/* Kaggle プロフィールへのリンク（値の中で唯一のリンク。青で示す） */
+.cfg__link {
+  color: var(--accent);
+}
+.cfg__link:hover {
+  color: var(--accent-bright);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 @media (max-width: 560px) {
   .cfg__row {
     grid-template-columns: 1fr;

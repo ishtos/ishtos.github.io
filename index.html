@@ -264,15 +264,15 @@
         <h2 class="sect__title reveal" data-en="Skills &amp; Awards">スキル・受賞</h2>
 
         <!-- 設定ファイル風のスキル表記（ヒーローの # ishtos.cfg と呼応）。
-             キー・値は言語共通なので data-en 不要。 -->
-        <div class="cfg reveal" role="img"
-             aria-label="Skills: backend TypeScript+Hono+Prisma/Drizzle, Java+Spring Boot+Hibernate, Kotlin+Ktor+Exposed; frontend TypeScript+Next.js+React; ml Python+PyTorch+LightGBM; database PostgreSQL, Oracle, MySQL, Redis; cloud AWS, Azure, Google Cloud; infra Terraform, Kubernetes; sre Datadog, Prometheus, Grafana, Sentry; awards Kaggle Competition Master, JPHACKS Finalist.">
+             キー・値は言語共通なので data-en 不要。
+             記号（# skills.cfg / = ）は装飾なので aria-hidden で読み上げ対象外にする。 -->
+        <div class="cfg reveal">
           <p class="cfg__file" aria-hidden="true"># skills.cfg</p>
 
-          <div class="cfg__block" aria-hidden="true">
+          <div class="cfg__block">
             <p class="cfg__section">[stack]</p>
             <div class="cfg__row">
-              <span class="cfg__key">backend</span><span class="cfg__eq">=</span>
+              <span class="cfg__key">backend</span><span class="cfg__eq" aria-hidden="true">=</span>
               <span class="cfg__vals cfg__vals--stack">
                 <span class="cfg__val">TypeScript + Hono + Prisma / Drizzle</span>
                 <span class="cfg__val">Java + Spring Boot + Hibernate</span>
@@ -280,53 +280,53 @@
               </span>
             </div>
             <div class="cfg__row">
-              <span class="cfg__key">frontend</span><span class="cfg__eq">=</span>
+              <span class="cfg__key">frontend</span><span class="cfg__eq" aria-hidden="true">=</span>
               <span class="cfg__vals"><span class="cfg__val">TypeScript + Next.js + React</span></span>
             </div>
             <div class="cfg__row">
-              <span class="cfg__key">ml</span><span class="cfg__eq">=</span>
+              <span class="cfg__key">ml</span><span class="cfg__eq" aria-hidden="true">=</span>
               <span class="cfg__vals"><span class="cfg__val">Python + PyTorch + LightGBM</span></span>
             </div>
           </div>
 
-          <div class="cfg__block" aria-hidden="true">
+          <div class="cfg__block">
             <p class="cfg__section">[data]</p>
             <div class="cfg__row">
-              <span class="cfg__key">database</span><span class="cfg__eq">=</span>
+              <span class="cfg__key">database</span><span class="cfg__eq" aria-hidden="true">=</span>
               <span class="cfg__vals">
                 <span class="cfg__val">PostgreSQL</span><span class="cfg__val">Oracle</span><span class="cfg__val">MySQL</span><span class="cfg__val">Redis</span>
               </span>
             </div>
           </div>
 
-          <div class="cfg__block" aria-hidden="true">
+          <div class="cfg__block">
             <p class="cfg__section">[platform]</p>
             <div class="cfg__row">
-              <span class="cfg__key">cloud</span><span class="cfg__eq">=</span>
+              <span class="cfg__key">cloud</span><span class="cfg__eq" aria-hidden="true">=</span>
               <span class="cfg__vals">
                 <span class="cfg__val">AWS</span><span class="cfg__val">Azure</span><span class="cfg__val">Google Cloud</span>
               </span>
             </div>
             <div class="cfg__row">
-              <span class="cfg__key">infra</span><span class="cfg__eq">=</span>
+              <span class="cfg__key">infra</span><span class="cfg__eq" aria-hidden="true">=</span>
               <span class="cfg__vals">
                 <span class="cfg__val">Terraform</span><span class="cfg__val">Kubernetes</span>
               </span>
             </div>
             <div class="cfg__row">
-              <span class="cfg__key">sre</span><span class="cfg__eq">=</span>
+              <span class="cfg__key">sre</span><span class="cfg__eq" aria-hidden="true">=</span>
               <span class="cfg__vals">
                 <span class="cfg__val">Datadog</span><span class="cfg__val">Prometheus</span><span class="cfg__val">Grafana</span><span class="cfg__val">Sentry</span>
               </span>
             </div>
           </div>
 
-          <div class="cfg__block" aria-hidden="true">
+          <div class="cfg__block">
             <p class="cfg__section">[credentials]</p>
             <div class="cfg__row">
-              <span class="cfg__key">awards</span><span class="cfg__eq">=</span>
+              <span class="cfg__key">awards</span><span class="cfg__eq" aria-hidden="true">=</span>
               <span class="cfg__vals">
-                <span class="cfg__val">Kaggle Competition Master</span><span class="cfg__val">JPHACKS Finalist</span>
+                <a class="cfg__val cfg__link" href="https://www.kaggle.com/tiginkgo" target="_blank" rel="noopener">Kaggle Competition Master</a><span class="cfg__val">JPHACKS Finalist</span>
               </span>
             </div>
           </div>

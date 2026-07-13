@@ -20,6 +20,8 @@
   --glow: rgba(56, 139, 253, 0.13);
   --success: #3fb950;
   --success-glow: rgba(63, 185, 80, 0.5);
+  --gold: #e3b341;
+  --gold-bright: #f2cc60;
 
   /* コンテナ幅は rem 基準にして、画面幅に応じて拡大する */
   --wrap: 66rem;
@@ -55,6 +57,8 @@
   --glow: rgba(9, 105, 218, 0.08);
   --success: #1a7f37;
   --success-glow: rgba(26, 127, 55, 0.4);
+  --gold: #9e6a03;
+  --gold-bright: #7d5200;
 }
 
 /* ============================================================
@@ -842,6 +846,15 @@ body::before {
   color: var(--accent-bright);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+/* 受賞歴（[credentials]）は金色で強調 */
+.cfg__block--awards .cfg__section,
+.cfg__block--awards .cfg__val {
+  color: var(--gold);
+}
+.cfg__block--awards .cfg__val:hover,
+.cfg__block--awards .cfg__link:hover {
+  color: var(--gold-bright);
 }
 @media (max-width: 560px) {
   .cfg__row {

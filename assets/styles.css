@@ -767,6 +767,10 @@ body::before {
   font-weight: 500;
   color: var(--ink);
 }
+/* 現職（緑ノード）の役職名は緑にして「稼働中」を強調 */
+.ledger__row.is-current .ledger__role {
+  color: var(--success);
+}
 .ledger__org {
   font-family: var(--mono);
   font-size: 0.85rem;
